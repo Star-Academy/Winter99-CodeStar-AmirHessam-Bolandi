@@ -13,19 +13,19 @@ public class Result {
     
     @Override
     public String toString() {
-        String resultStr = "";
+        var resultStr = new StringBuilder("");
         if (this.resultSet.isEmpty()) {
-            resultStr = "No Result found";
+            resultStr.append("No result found");
         } else {
             if (this.isQuery) {
                 for(Entry entry : resultSet){
-                    resultStr += " " + entry.getDOCName();
+                    resultStr.append(" " + entry.getDocName());
                 }
             } else {
-                resultStr = this.resultSet.toString();
+                resultStr.append(this.resultSet.toString());
             }
         }
-        return resultStr;
+        return resultStr.toString();
     }
     
     public HashSet<Entry> getResultSet(){

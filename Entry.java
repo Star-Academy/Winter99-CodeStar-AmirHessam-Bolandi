@@ -1,16 +1,16 @@
 package Phase01.src;
 
 class Entry {
-    private String DOCName;
+    private String docName;
     private int index;
     
-    public Entry(String DOCName, int index) {
-        this.DOCName = DOCName;
+    public Entry(String docName, int index) {
+        this.docName = docName;
         this.index = index;
     }
     
-    public String getDOCName() {
-        return this.DOCName;
+    public String getDocName() {
+        return this.docName;
     }
     
     public int getIndex() {
@@ -19,7 +19,7 @@ class Entry {
     
     @Override
     public String toString() {
-        return "Document Id: " + this.DOCName + ", Index: " + this.index;
+        return "Document Id: " + this.docName + ", Index: " + this.index;
     }
     
     @Override
@@ -27,13 +27,12 @@ class Entry {
         if (!(o instanceof Entry)) {
             return false;
         }
-        Entry e = (Entry) o;
-        return this.DOCName.equals(e.DOCName);
+        return this.docName.equals(((Entry) o).docName);
     }
     
     @Override
     public int hashCode() {
-        return this.DOCName.hashCode();
+        return this.docName.hashCode();
     }
 }
 

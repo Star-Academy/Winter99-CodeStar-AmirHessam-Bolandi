@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class FileReader {
-    private HashMap<String, String> filesContents = new HashMap<String, String>();
     private String path;
 
     public FileReader(String path) {
@@ -14,24 +13,24 @@ public class FileReader {
     }
 
     public HashMap<String, String> readContent() {
+        var filesContents = new HashMap<String, String>();
         for (File file : this.getFiles()) {
             try {
-                Scanner scanner = new Scanner(file);
-                String content = "";
+                var scanner = new Scanner(file);
+                var content = new StringBuilder();
                 while (scanner.hasNextLine()) {
-                    content = content + " " + scanner.nextLine();
+                    content.append(" ").append(scanner.nextLine());
                 }
-                filesContents.put(file.getName(), content);
+                filesContents.put(file.getName(), content.toString());
                 scanner.close();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
-        return this.filesContents;
+        return filesContents;
     }
 
     public File[] getFiles() {
-        File directory = new File(this.path);
-        return directory.listFiles();
+        return new File(this.path).listFiles();
     }
 }
