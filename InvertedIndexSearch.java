@@ -1,14 +1,8 @@
-package Phase01.src;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,9 +18,13 @@ public class InvertedIndexSearch {
 
     public InvertedIndexSearch(HashMap<String, String> fileContents) {
         for (String id : fileContents.keySet()) {
-            addWords(id, fileContents.get(id));
+            addWords(id, getListOfWords(fileContents.get(id)));
             allDocs.add(new Entry(id, 0));
         }
+    }
+
+    public HashMap<String, ArrayList<Entry>> getIndexMap(){
+        return this.indexMap;
     }
 
     public Result search(String input) {
@@ -34,12 +32,16 @@ public class InvertedIndexSearch {
         return new Result(this.searchQuery(input), multiWords);
     }
 
-    private HashSet<Entry> searchQuery(String query) {
+    public HashSet<Entry> searchQuery(String query) {
+
         var normalSet = new HashSet<Entry>(allDocs);
         var plusSet = new HashSet<Entry>();
         var minusSet = new HashSet<Entry>();
-        for (String normalStr : this.seperatQuery(" " + query, NORMAL_PATTERN))
-            normalSet.retainAll(searchWord(normalStr));
+        for (String normalStr : this.seperatQuery(" " + query, NORMAL_PATTERN)) {
+            var temp = searchWord(normalStr);
+            temp.retainAll(normalSet);
+            normalSet = temp;
+        }
         for (String plusStr : this.seperatQuery(query, PLUS_PATTERN))
             plusSet.addAll(searchWord(plusStr));
         for (String minusStr : this.seperatQuery(query, MINUS_PATTERN))
@@ -47,7 +49,7 @@ public class InvertedIndexSearch {
         return this.combineResults(normalSet, plusSet, minusSet);
     }
 
-    private HashSet<Entry> searchWord(String word) {
+    public HashSet<Entry> searchWord(String word) {
         var result = new HashSet<Entry>();
         String word_s = "";
         if (word.charAt(word.length() - 1) == 's') {
@@ -64,7 +66,7 @@ public class InvertedIndexSearch {
         return result;
     }
 
-    private HashSet<Entry> combineResults(HashSet<Entry> normalSet, HashSet<Entry> plusSet, HashSet<Entry> minusSet) {
+    public HashSet<Entry> combineResults(HashSet<Entry> normalSet, HashSet<Entry> plusSet, HashSet<Entry> minusSet) {
         // add normal set, Intersect plus set, Minus minus set'
         var result = new HashSet<Entry>();
         result.addAll(normalSet);
@@ -73,7 +75,7 @@ public class InvertedIndexSearch {
         return result;
     }
 
-    private ArrayList<String> seperatQuery(String query, String regex) {
+    public ArrayList<String> seperatQuery(String query, String regex) {
         var words = new ArrayList<String>();
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(query);
@@ -83,8 +85,7 @@ public class InvertedIndexSearch {
         return words;
     }
 
-    private void addWords(String id, String content) {
-        String[] listOfWords = getListOfWords(content);
+    public void addWords(String id, String[] listOfWords) {
         for (int i = 0; i < listOfWords.length; i++) {
             String word = listOfWords[i];
             if (StopWordsClass.STOP_WORDS.contains(word))
@@ -97,8 +98,8 @@ public class InvertedIndexSearch {
         }
     }
 
-    private String[] getListOfWords(String content) {
-        content = content.toLowerCase().replaceAll(NOT_WORDS_PATTERN, " ");
+    public String[] getListOfWords(String content) {
+        content = content.toLowerCase().replaceAll(NOT_WORDS_PATTERN, " ").trim();
         return content.split(SPACE_PATTERN);
     }
 

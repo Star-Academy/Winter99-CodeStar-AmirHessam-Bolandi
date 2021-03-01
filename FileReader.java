@@ -1,4 +1,3 @@
-package Phase01.src;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,7 +20,7 @@ public class FileReader {
                 while (scanner.hasNextLine()) {
                     content.append(" ").append(scanner.nextLine());
                 }
-                filesContents.put(file.getName(), content.toString());
+                filesContents.put(file.getName(), content.toString().trim());
                 scanner.close();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

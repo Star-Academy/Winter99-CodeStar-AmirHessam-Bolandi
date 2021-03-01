@@ -1,6 +1,5 @@
-package Phase01.src;
 
-class Entry {
+public class Entry {
     private String docName;
     private int index;
     

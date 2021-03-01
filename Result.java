@@ -1,4 +1,3 @@
-package Phase01.src;
 
 import java.util.HashSet;
 
@@ -31,4 +30,6 @@ public class Result {
     public HashSet<Entry> getResultSet(){
         return this.resultSet;
     }
+
+    
 }

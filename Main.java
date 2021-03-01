@@ -1,7 +1,3 @@
-package Phase01.src;
-
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Scanner;
 
 public class Main {
@@ -18,10 +14,10 @@ public class Main {
         while (true) {
             System.out.println(WELCOME_MASSAGE);
             inputStr = scanner.nextLine().toLowerCase();
-            if (inputStr.equals(EXIT_COMMAND))
-                break;
+            if (inputStr.equals(EXIT_COMMAND)) break;
             System.out.println(invertedIndexSearch.search(inputStr));
         }
+
     }
 
 }
