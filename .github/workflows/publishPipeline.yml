@@ -21,11 +21,10 @@ jobs:
       id: version
       uses: pozetroninc/github-action-get-latest-release@master
       with:
-        repository: Star-Academy/Winter99-CodeStar-AmirHessam-Bolandi
-        
+        repository: Star-Academy/Winter99-CodeStar-AmirHessam-Bolandi  
     - name: Build library and generate NuGet Package
       run: dotnet pack -c Release -o artifacts -p:PackageVersion=${{ steps.version.outputs.release }}
       working-directory: Phase05/app/library
       
     - name: Publish NuGet Package
-      run: dotnet nuget push .\\**\\*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push **/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
