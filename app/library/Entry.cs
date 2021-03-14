@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace library
+﻿namespace library
 {
     public class Entry
     {
-        public string DocName { get; set; }
-        public int Index { get; set; }
+        public readonly string DocName;
+        public readonly int Index;
         public Entry(string docName, int index)
         {
             DocName = docName;

@@ -6,15 +6,14 @@ namespace library
 {
     public class Result
     {
-        public virtual HashSet<Entry> ResultSet { get; set; }
-        public bool isQuery { get; set; }
+        public readonly HashSet<Entry> ResultSet;
+        public readonly bool IsQuery;
 
-        public Result(HashSet<Entry> ResultSet, bool isQuery)
+        public Result(HashSet<Entry> ResultSet, bool IsQuery)
         {
             this.ResultSet = ResultSet;
-            this.isQuery = isQuery;
+            this.IsQuery = IsQuery;
         }
-        public Result() { }
 
         public override string ToString()
         {
@@ -23,7 +22,7 @@ namespace library
                 resultStr.Append("No result found");
             else
             {
-                if (this.isQuery)
+                if (this.IsQuery)
                 {
                     foreach (Entry entry in ResultSet)
                         resultStr.Append(" " + entry.DocName);

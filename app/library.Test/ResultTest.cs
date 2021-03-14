@@ -19,10 +19,10 @@ namespace library.Test
         [Fact]
         public void ToStringTest()
         {
-        Assert.True(query.ToString() == " test1 test2" || query.ToString() == " test2 test1");
-        Assert.True(word.ToString() == "Document Id: test1, Index: 11, Document Id: test2, Index: 14"
-                     || word.ToString() == "[Document Id: test2, Index: 14, Document Id: test1, Index: 11]");
-        Assert.True(empty.ToString() == "No result found");
+            Assert.True(query.ToString() == " test1 test2" || query.ToString() == " test2 test1");
+            Assert.True(word.ToString() == "Document Id: test1, Index: 11, Document Id: test2, Index: 14"
+                         || word.ToString() == "[Document Id: test2, Index: 14, Document Id: test1, Index: 11]");
+            Assert.True(empty.ToString() == "No result found");
         }
     }
 }

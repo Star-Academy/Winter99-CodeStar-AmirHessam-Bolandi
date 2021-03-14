@@ -15,13 +15,13 @@ namespace library.Test
         [Fact]
         public void GetIndexTest()
         {
-            Assert.Equal(entry.Index, 11);
+            Assert.Equal(11, entry.Index);
         }
 
         [Fact]
         public void ToStringTest()
         {
-            Assert.Equal(entry.ToString(), "Document Id: test, Index: 11");
+            Assert.Equal("Document Id: test, Index: 11", entry.ToString());
         }
 
         [Theory]
@@ -50,7 +50,7 @@ namespace library.Test
         [Fact]
         public void GetHashCodeTest()
         {
-            Assert.Equal(entry.GetHashCode(), "test".GetHashCode());
+            Assert.Equal( "test".GetHashCode(), entry.GetHashCode());
         }
     }
 }

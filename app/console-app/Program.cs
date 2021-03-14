@@ -14,11 +14,10 @@ namespace console_app
             var fileReader = new FileReader(DATA_PATH);
             var fileContents = fileReader.ReadContent();
             var invertedIndexSearch = new InvertedIndexSearch(fileContents);
-            string inputString = "";
             while (true)
             {
                 System.Console.WriteLine((WELCOME_MASSAGE));
-                inputString = System.Console.ReadLine();
+                var inputString = System.Console.ReadLine();
                 if (inputString.Equals(EXIT_COMMAND))
                     break;
                 System.Console.WriteLine(invertedIndexSearch.Search(inputString));

@@ -10,9 +10,9 @@ namespace library
         public Dictionary<string, List<Entry>> IndexMap { get; set; } = new Dictionary<string, List<Entry>>();
         public HashSet<Entry> allDocs { get; set; } = new HashSet<Entry>();
         public static string SPACE_PATTERN1 => SPACE_PATTERN;
-        private const string NORMAL_PATTERN = @"\s(\w+)";
-        private const string PLUS_PATTERN = @"\+(\w+)";
-        private const string MINUS_PATTERN = @"-(\w+)";
+        public const string NORMAL_PATTERN = @"\s(\w+)";
+        public const string PLUS_PATTERN = @"\+(\w+)";
+        public const string MINUS_PATTERN = @"-(\w+)";
         private const string NOT_WORDS_PATTERN = @"[^a-z0-9]";
         private const string SPACE_PATTERN = @"\s+";
 
@@ -65,15 +65,15 @@ namespace library
         public HashSet<Entry> SearchWord(string word)
         {
             var result = new HashSet<Entry>();
-            string word_s;
+            string wordComplement;
             if (word.EndsWith("s"))
-                word_s = word.Remove(word.Length - 1);
+                wordComplement = word.Remove(word.Length - 1);
             else
-                word_s = word + "s";
+                wordComplement = word + "s";
             if (IndexMap.ContainsKey(word))
                 result.UnionWith(IndexMap[word]);
-            if (IndexMap.ContainsKey(word_s))
-                result.UnionWith(IndexMap[word_s]);
+            if (IndexMap.ContainsKey(wordComplement))
+                result.UnionWith(IndexMap[wordComplement]);
             return result;
         }
         public HashSet<Entry> SearchQuery(string query)

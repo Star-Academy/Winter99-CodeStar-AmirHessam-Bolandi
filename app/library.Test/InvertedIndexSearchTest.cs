@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Collections.Generic;
 using Moq;
 using Xunit;
@@ -41,10 +40,10 @@ namespace library.Test
         public void SeperateQueryTest()
         {
             string inputStr = " hello +ali -go +majid +r";
-            Assert.Equal(invertedIndexSearch.SeperateQuery(inputStr, @"\+(\w+)"),
+            Assert.Equal(invertedIndexSearch.SeperateQuery(inputStr, InvertedIndexSearch.PLUS_PATTERN),
                     new List<string> { "ali", "majid", "r" });
-            Assert.Equal(invertedIndexSearch.SeperateQuery(inputStr, @"\-(\w+)"), new List<string> { "go" });
-            Assert.Equal(invertedIndexSearch.SeperateQuery(inputStr, @"\s(\w+)"), new List<string> { "hello" });
+            Assert.Equal(invertedIndexSearch.SeperateQuery(inputStr, InvertedIndexSearch.MINUS_PATTERN), new List<string> { "go" });
+            Assert.Equal(invertedIndexSearch.SeperateQuery(inputStr, InvertedIndexSearch.NORMAL_PATTERN), new List<string> { "hello" });
         }
 
         [Fact]
@@ -72,12 +71,8 @@ namespace library.Test
         [Fact]
         public void SearchTest()
         {
-            var result1 = new Mock<Result>();  
-            var result2 = new Mock<Result>();  
-            result1.SetupGet(x => x.ResultSet).Returns(word_test_result);  
-            result2.SetupGet(x => x.ResultSet).Returns(query_test_result);  
-            Assert.Equal(invertedIndexSearch.Search("hello").ResultSet, (result1.Object.ResultSet));
-            Assert.Equal(invertedIndexSearch.Search("hello +bars -doesntExist").ResultSet, (result2.Object.ResultSet));
+            Assert.Equal(invertedIndexSearch.Search("hello").ResultSet, word_test_result);
+            Assert.Equal(invertedIndexSearch.Search("hello +bars -doesntExist").ResultSet, query_test_result);
         }
     }
 }
