@@ -4,4 +4,16 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageId>StarAcademy.Team22.InvertedIndexSearch</PackageId>
+        <Authors>AmirHessam Bolandi - Alireza mohammadian</Authors>
+        <Company>Star Academy</Company>
+        <ralease>1.0.1</ralease>
+    </PropertyGroup>
+
+</Project>
+
 </Project>
