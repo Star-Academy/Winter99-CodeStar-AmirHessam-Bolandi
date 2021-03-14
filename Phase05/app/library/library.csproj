@@ -1,19 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
-
-  <Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-        <PackageId>StarAcademy.Team22.InvertedIndexSearch</PackageId>
-        <Authors>AmirHessam Bolandi - Alireza mohammadian</Authors>
-        <Company>Star Academy</Company>
+    <TargetFramework>net5.0</TargetFramework>        
+    <PackageId>StarAcademy.Team22.InvertedIndexSearch</PackageId>
+    <Authors>AmirHessam Bolandi - Alireza mohammadian</Authors>
+    <Company>Star Academy</Company>
       
-    </PropertyGroup>
-
+  </PropertyGroup>
 </Project>
 
-</Project>
