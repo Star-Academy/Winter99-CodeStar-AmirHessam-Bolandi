@@ -39,30 +39,57 @@ namespace people
             */
 
             // MakeMatchQuery(index, "Huber", "name", client);
-            MakeMatchQuery(index, "blue", "eyeColor", client);
-            
+            MakeMatchQuery(index, client, "Hunbe", "name", 3);
+            MakeMultiMatchQuery(index, client, "culpa", new string[] {"name", "about"}, 3);
+            MakeTermQuery(index, client, "22", "age", 1);
+
             var responseClusterHealth = client.Cluster.Health();
             var responseCatNodes = client.Cat.Nodes();
             var responseCatIndices = client.Cat.Indices();
 
             Console.WriteLine(responseClusterHealth.ClusterName);
-
-
         }
 
-        static void MakeMatchQuery(string index, string query, string field, ElasticClient client)
+        static void MakeMatchQuery(string index, ElasticClient client, string query, string field, int fuzziness = 1)
         {
             QueryContainer matchQuery = new MatchQuery
             {
                 Query = query,
-                Field = field
+                Field = field,
+                Fuzziness = Fuzziness.EditDistance(fuzziness)
             };
-
-             var response = client.Search<Dictionary<string, object>>(s => s.Index(index).Query(q => matchQuery));
-            Console.WriteLine(response);
-            Console.WriteLine(response.Hits.Count);
-            // Console.WriteLine(response.);
+            var response = client.Search<Person>(s => s.Index(index).Query(q => matchQuery));
+            Console.WriteLine("match query:");
+            response.Hits.ToList().ForEach(x => Console.WriteLine(x.Source.ToString()));
         }
+
+        static void MakeMultiMatchQuery(string index, ElasticClient client, string query, string[] fields,
+            int fuzziness = 1)
+        {
+            QueryContainer multiMatchQuery = new MultiMatchQuery
+            {
+                Query = query,
+                Fields = fields,
+                Fuzziness = Fuzziness.EditDistance(fuzziness)
+            };
+            var response = client.Search<Person>(s => s.Index(index).Query(q => multiMatchQuery));
+            Console.WriteLine("multi-match query:");
+            response.Hits.ToList().ForEach(x => Console.WriteLine(x.Source.ToString()));
+        }
+
+        static void MakeTermQuery(string index, ElasticClient client, string query, string field, double boost = 1)
+        {
+            QueryContainer termQuery = new TermQuery
+            {
+                Field = field,
+                Value = query,
+                Boost = boost
+            };
+            var response = client.Search<Person>(s => s.Index(index).Query(q => termQuery));
+            Console.WriteLine("Term query:");
+            response.Hits.ToList().ForEach(x => Console.WriteLine(x.Source.ToString()));
+        }
+
 
         static ResponseBase MakeIndex(string index, ElasticClient client)
         {
@@ -148,6 +175,11 @@ public class Person
             return location;
         }
         set { location = value; }
+    }
+
+    public override string ToString()
+    {
+        return Name + " " + Age + " " + Email + " " + Phone + " " + Location;
     }
 }
 
