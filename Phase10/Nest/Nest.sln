@@ -2,8 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "people", "people\people.csproj", "{0108BF26-B6E0-4B50-9123-9D6F4F9833E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest", "Nest\Nest.csproj", "{CB3D5EE4-00AF-426F-8A40-EEF28DBEE93D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NestHandler", "NestHandler\NestHandler.csproj", "{ED218F0C-B391-4542-A071-0D355C220539}"
 EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +19,9 @@ Global
 		{CB3D5EE4-00AF-426F-8A40-EEF28DBEE93D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB3D5EE4-00AF-426F-8A40-EEF28DBEE93D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB3D5EE4-00AF-426F-8A40-EEF28DBEE93D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED218F0C-B391-4542-A071-0D355C220539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED218F0C-B391-4542-A071-0D355C220539}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED218F0C-B391-4542-A071-0D355C220539}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED218F0C-B391-4542-A071-0D355C220539}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
