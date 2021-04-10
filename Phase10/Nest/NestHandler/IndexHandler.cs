@@ -4,6 +4,7 @@ using System.Linq;
 using Elasticsearch.Net;
 using Nest;
 
+
 namespace NestHandler
 {
     public class IndexHandler//<T> where T : class
@@ -21,7 +22,7 @@ namespace NestHandler
         public ISearchResponse<T> GetResponseOfQuery<T>(QueryContainer queryContainer) where T : class
         {
             return Client.Search<T>(s => s.Index(IndexName).Query(q => queryContainer));
-        }
+        } 
 
         public static QueryContainer MakeFuzzyQuery(string query, string field, int fuzziness = -1)
         {
@@ -154,6 +155,22 @@ namespace NestHandler
             };
             return geoDistanceQuery;
         }
+        public ISearchResponse<T> GetResponseOfAggs<T>(TermsAggregation termsAggregation) where T : class
+        {
+            
+            return Client.Search<T>(s => s.Index(IndexName).Aggregations(
+                termsAggregation));
+        }
+        public static TermsAggregation MakeTermsAggQuery(string field,string name = "",bool keyword=false)
+        {
+            if (name == "")
+                name = field;
+            TermsAggregation termsAggregation = new TermsAggregation(name)
+            {
+                Field = field+(keyword?".keyword":"")
+            };
+            return termsAggregation;
+        }
 
 
         public ResponseBase MakeIndex<T>(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> settingSelector,
@@ -161,31 +178,6 @@ namespace NestHandler
         {
             var response = Client.Indices.Create(IndexName,
                 s => s.Settings(settingSelector).Map<T>(mapSelector));
-                /*
-                s => s.Settings(settings => settings
-        
-                        .Setting("max_ngram_diff", 7)
-                        .Analysis(analysis => analysis
-                            .TokenFilters(tf => tf
-                                .NGram("my-ngram-filter", ng => ng
-                                    .MinGram(3)
-                                    .MaxGram(10)))
-                            .Analyzers(analyzer => analyzer
-                                .Custom("my-ngram-analyzer", custom => custom
-                                    .Tokenizer("standard")
-                                    .Filters("lowercase", "my-ngram-filter")))))
-                    .Map<Person>(m => m
-                        .Properties(pr => pr
-                            .Text(t => t
-                                .Name(n => n.About)
-                                .Fields(f => f
-                                    .Text(ng => ng
-                                        .Name("ngram")
-                                        .Analyzer("my-ngram-analyzer")))
-                            )
-                        )
-                    )
-                );*/
             return response;
         }
 
@@ -222,17 +214,16 @@ namespace NestHandler
             return Client.Cluster.Health(IndexName, healthSelector);
         }
 
-        /*static   MakeTermsAggQuery(string index, ElasticClient client, string[] queries, string field, double boost = 1)
-        {
-            TermsAggregation termsAggregation = new TermsAggregation(field);
-            // return null; //client.Search<Person>(s => s.Index(index).Query(q => termsQuery));
-
-        }*/
 
         public static void QueryResponsePrinter<T>(string queryType, ISearchResponse<T> response) where T:class
         {
-            Console.WriteLine(queryType + " query:");
+            Console.WriteLine(queryType + " query:  ---------------------");
             response.Hits.ToList().ForEach(x => Console.WriteLine(x.Source.ToString()));
+        }
+        public static void TermAggResponsePrinter<T>( ISearchResponse<T> response,string name) where T:class
+        {
+            Console.WriteLine(name + " Terms Aggregation:  ---------------------");
+            response.Aggregations.Terms(name).Buckets.ToList().ForEach(x => Console.WriteLine(x.Key+" : "+x.DocCount));
         }
     }
 }
