@@ -19,24 +19,11 @@ namespace people
 
             // var responsePing = client.Ping();
             // Console.WriteLine(responsePing);
+
+            IndexHandler indexHandler = new IndexHandler("my-indexx", MakeClient(uri));
             
-            IndexHandler indexHandler = new IndexHandler("my-index", MakeClient(uri));
-            /*
             indexHandler.MakeIndex<Person>(
-                settings => settings
-                    .Analysis(analysis => analysis
-                        .TokenFilters(tf => tf
-                            .PatternCapture("my-email-filter", emailFilter => emailFilter.Patterns(
-                                "([^@]+)",
-                                "(\\p{L}+)",
-                                "(\\d+)",
-                                "@(.+)",
-                                "([^-@]+)"
-                            ).PreserveOriginal(true)))
-                        .Analyzers(analyzer => analyzer
-                            .Custom("my-email-analyzer",
-                                custom => custom.Filters("lowercase", "my-email-filter").Tokenizer("uax_url_email"))))
-                ,
+                null,
                 map => map
                     .Properties(pr => pr
                         .Text(n => n
@@ -47,7 +34,7 @@ namespace people
             );
 
             indexHandler.BulkIndex(personsList);
-            */
+            
             ISearchResponse<Person> response = null;
 /*
             response = indexHandler.GetResponseOfQuery<Person>(IndexHandler.MakeMatchQuery("Hunbe", "name", 3));
@@ -85,11 +72,9 @@ namespace people
                 IndexHandler.MakeGeoDistanceQuery("100m", 43.457637, 77.937221, Infer.Field<Person>(p => p.Location)));
             IndexHandler.QueryResponsePrinter("GeoDistance ", response);*/
 
-            
-            
-            response = indexHandler.GetResponseOfAggs<Person>(IndexHandler.MakeTermsAggQuery("gender",keyword:true));
-            IndexHandler.TermAggResponsePrinter(response,"gender");
-           
+
+            response = indexHandler.GetResponseOfAggs<Person>(IndexHandler.MakeTermsAggQuery("gender", keyword: true));
+            IndexHandler.TermAggResponsePrinter(response, "gender");
 
 
             var refreshResponse = indexHandler.Refresh();
@@ -102,7 +87,6 @@ namespace people
             Console.WriteLine(clusterHealthResponse.ClusterName + " " + clusterHealthResponse.Status + " pt" +
                               clusterHealthResponse.NumberOfPendingTasks + " n" + clusterHealthResponse.NumberOfNodes);
             Console.WriteLine();
-            
         }
 
         static ElasticClient MakeClient(Uri uri)
