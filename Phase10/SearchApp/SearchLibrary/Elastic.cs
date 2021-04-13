@@ -1,14 +1,8 @@
-﻿using System.Globalization;
-using System.Net.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elasticsearch.Net;
 using Nest;
-using System.Collections.Generic;
-using System.Linq;
-using Elasticsearch.Net;
-using Nest;
+
 
 namespace SearchLibrary
 {
@@ -21,21 +15,19 @@ namespace SearchLibrary
         public Elastic(string indexName, Uri uri)
         {
             IndexName = indexName;
-            Client = this.CreateClient(uri);
-            // Console.WriteLine($"{Client.Ping()}");
-            
+            Client = this.CreateClient(uri);            
         }
 
-        public ElasticClient CreateClient(Uri uri)
+        public ElasticClient CreateClient(Uri uri) 
         {
             var connectionSettings = new ConnectionSettings(uri);
             connectionSettings.EnableDebugMode();
             return new ElasticClient(connectionSettings);
         }
 
-        public ISearchResponse<T> GetResponseOfQuery<T>(QueryContainer queryContainer) where T : class
+        public ISearchResponse<T> GetResponseOfQuery<T>(QueryContainer queryContainer, int size=20) where T : class
         {
-            return Client.Search<T>(s => s.Index(IndexName).Query(q => queryContainer));
+            return Client.Search<T>(s => s.Index(IndexName).Query(q => queryContainer).Size(size));
         }
         public static QueryContainer MakeFuzzyQuery(string query, string field, int fuzziness = -1)
         {
@@ -48,7 +40,7 @@ namespace SearchLibrary
             return fuzzyQuery;
         }
 
-        public static QueryContainer MakeMatchQuery(string query, string field, int fuzziness = 1)
+        public static QueryContainer MakeMatchQuery(string query, string field, int fuzziness = 0)
         {
             QueryContainer matchQuery = new MatchQuery
             {
@@ -186,33 +178,30 @@ namespace SearchLibrary
         }
 
 
-        public ResponseBase CreateIndex<T>(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> settingSelector,
-            Func<TypeMappingDescriptor<T>, ITypeMapping> mapSelector) where T : class
+        public ResponseBase CreateIndex<T>(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> settingSelector = null,
+            Func<TypeMappingDescriptor<T>, ITypeMapping> mapSelector = null) where T : class
         {
             var response = Client.Indices.Create(IndexName,
                 s => s.Settings(settingSelector).Map<T>(mapSelector));
             return response;
         }
 
-        public ResponseBase CreateIndex<T>(Func<TypeMappingDescriptor<T>, ITypeMapping> mapSelector) where T : class
-        {
-            var response = Client.Indices.Create(IndexName,
-                                s => s.Map<T>(mapSelector));
-            return response;
+        public ResponseBase DeleteIndex(){
+            return Client.Indices.Delete(IndexName);
         }
 
-        public BulkResponse BulkIndex<T>(List<T> dataList) where T : class
+        public BulkResponse BulkIndex<T>(List<T> dataList , string idFieldName) where T : class
         {
             var bulkDescriptor = new BulkDescriptor();
             foreach (var data in dataList)
             {
-                // Console.Write
                 bulkDescriptor.Index<T>(x => x
                     .Index(IndexName)
                     .Document(data)
+                    .Id((string)data.GetType().GetProperty(idFieldName).GetValue(data))
                 );
             }
-            var response = Client.Bulk(bulkDescriptor).Validate();
+            var response = Client.Bulk(bulkDescriptor);
             return response;
         }
 
@@ -248,3 +237,4 @@ namespace SearchLibrary
         }
     }
 }
+

@@ -15,11 +15,11 @@ namespace SearchLibrary
         {
             if (response.OriginalException != null)
             {
-                throw response.OriginalException.InnerException;
+                throw response.OriginalException;
             }
             else if (response.ServerError != null)
             {
-                throw new ServerException($"Sorry something is wrong with the server!\n status: {response.ServerError.Status} \n Error message: {response.ServerError.Error} ");
+                throw new ServerException($"Sorry something went wrong with the server!\n status: {response.ServerError.Status} \n Error message: {response.ServerError.Error} ");
             }
         }
     }
