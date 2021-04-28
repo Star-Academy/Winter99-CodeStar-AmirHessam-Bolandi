@@ -1,0 +1,60 @@
+@font-face {
+    font-family: my-nastaliq;
+    src: url("assets/fonts/IranNastaliq.ttf");
+}
+@font-face {
+    font-family:farhood;
+    src: url("assets/fonts/Farhood.ttf");
+}
+@font-face {
+    font-family:arsoo;
+    src: url("assets/fonts/FP_Arsoo.ttf");
+}
+
+.background-image {
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: -1;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-color: #4a4b5f;
+}
+
+
+.body-contents {
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    direction: rtl;
+
+
+
+}
+.boxes {
+    display: inline-grid;
+    grid-template-rows: 90px 200px;
+    grid-template-columns: 500px;
+    gap: 10px;
+    border: 3px solid #499306;
+}
+.search-box {
+    display: inline-grid;
+    grid-template-rows: auto auto;
+    border: 2px solid #bd8787;
+    font-family: arsoo, serif;
+}
+.search-input{
+    font-family: farhood, serif;
+}
+.result-box {
+    font-family: arsoo, serif;
+}
+.result {
+
+}
