@@ -36,12 +36,12 @@ namespace SearchLibrary
 
         public List<string> Search(List<string> normals, List<string> pluses, List<string> minuses)
         {
-            var must_list = MakeMatchQueryList(normals);
-            must_list.Add(Elastic.MakeBoolQuery(
+            var mustList = MakeMatchQueryList(normals);
+            mustList.Add(Elastic.MakeBoolQuery(
                             should: MakeMatchQueryList(pluses).ToArray()
                         ));
             var queryContainer = Elastic.MakeBoolQuery(
-                    must: must_list.ToArray(),
+                    must: mustList.ToArray(),
                     mustNot: MakeMatchQueryList(minuses).ToArray()
                 );
 

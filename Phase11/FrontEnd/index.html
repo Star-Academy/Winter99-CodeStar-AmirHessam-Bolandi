@@ -6,7 +6,7 @@
     <script src="script.js"></script>
     <title>Document Search</title>
 </head>
-<body>
+<body onload="initSearch()" >
 <!--<div class="logo">-->
 <!--    توراستار-->
 <!--</div>-->
@@ -20,9 +20,10 @@
     <div class="boxes">
         <div class="search-box">
             <span>عبارت را وارد کنید :</span>
-            <input placeholder="جست و جو" id="searchInput" class="search-input">
+            <input placeholder="جست و جو" id="searchInput" class="search-input" onkeyup="preSearch()">
+            <button onclick="initSearch()">click</button>
         </div>
-        <div class="result-box">
+        <div id="result_box" class="result-box">
             نتایج:
             <div class="results">
                 <div class="result">
