@@ -33,6 +33,9 @@ function preSearch() {
 
             for (let i = 0; i < 10 && i < parsed.length; i++) {
                 const divElement = document.createElement("div");
+                divElement.id = parsed[i];
+                divElement.addEventListener('click', fileHandler, false);
+
                 divElement.className = "result";
                 divElement.innerHTML = parsed[i];
                 resultsElement.appendChild(divElement);
@@ -72,6 +75,8 @@ function search() {
 
             for (let i = 0; i < 10 && i < parsed.length; i++) {
                 const divElement = document.createElement("div");
+                divElement.id = parsed[i];
+                divElement.addEventListener('click', fileHandler, false);
                 divElement.className = "result";
                 divElement.innerHTML = parsed[i];
                 resultsElement.appendChild(divElement);
@@ -91,13 +96,13 @@ var advanceActive = false;
 
 function advancedButtonHandler() {
     if (!advanceActive) {
-        document.getElementById("resultBox").innerHTML = " ";
+        document.getElementById("resultBox").innerHTML = "";
 
         // document.getElementById("advancedInputs").style.display= "inline";
         document.getElementById("advancedInputs").className = "advanced-inputs";
         document.getElementById("searchOptionButton").style.fontSize = "15px";
         document.getElementById("searchOptionButton").innerHTML = "جست و جو"
-        document.getElementById("searchBoxLabel").innerHTML = "عبارات مورد نظر حود را با فاصله وارد کنید:"
+        document.getElementById("searchBoxLabel").innerHTML = "عبارات مورد نظر خود را با فاصله وارد کنید:"
 
         document.getElementById("normalBox").className = ".advanced-boxes";
         // document.getElementById("normalBox").style.gridTemplateRows= "90px 90px auto";
@@ -107,4 +112,41 @@ function advancedButtonHandler() {
         search();
     }
 
+}
+
+function fileHandler(element) {
+    let fileName = element.target.id;
+
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            let parsed = JSON.parse(this.responseText);
+            if(parsed==[]){
+
+            }else {
+                let resultElement =document.getElementById("resultBox");
+                resultElement.innerHTML="";
+
+                let divElement = document.createElement("div");
+                divElement.className = "file-name";
+                divElement.innerHTML = parsed[0].DocumentId;
+                resultElement.appendChild(divElement);
+                divElement = document.createElement("div");
+                divElement.className = "scroll-box";
+                divElement.innerHTML = parsed[0].Content;
+
+                let span = document.createElement("span");
+                span.className = "highlighted-word";
+                span.innerHTML="heer";
+                divElement.appendChild(span)
+
+                resultElement.appendChild(divElement);
+
+            }
+        }
+    };
+
+    xhttp.open('GET', url + "file/" + fileName);
+    xhttp.responseType = 'text';
+    xhttp.send();
 }

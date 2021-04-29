@@ -21,7 +21,8 @@
         <div class="search-box">
             <span id="searchBoxLabel">عبارت را وارد کنید :</span>
             <div id="inputs" class="inputs">
-                <input placeholder="جست و جو" id="searchInput" class="search-input" onkeyup="preSearch()">
+                <input placeholder="جست و جو" id="searchInput" class="search-input" onchange="preSearch()"
+                       onkeyup="preSearch()">
                 <button id="searchOptionButton" class="search-option-button" onclick="advancedButtonHandler()">جست و جوی
                     پیشرفته
                 </button>
@@ -37,6 +38,8 @@
 
         </div>
     </div>
+</div>
+
 
 </body>
 </html>
