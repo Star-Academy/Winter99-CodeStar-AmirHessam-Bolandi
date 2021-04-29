@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SearchApi.Controllers;
@@ -55,6 +56,12 @@ namespace SearchApi
         {
             var query = new Query(normals ,pluses,minuses);
             var responseList = searchEngine.Search(query.Normals, query.Pluses, query.Minuses);
+            return responseList;
+        }
+
+        public static string GetFileContent(string fileName)
+        {
+            var responseList = searchEngine.GetDocuments(fileName);
             return responseList;
         }
     }

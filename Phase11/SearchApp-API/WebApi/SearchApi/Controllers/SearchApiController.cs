@@ -71,5 +71,17 @@ namespace SearchApi.Controllers
                 return new BadRequestResult();
             return new OkObjectResult(response);
         }
+        
+        [Route("file/{fileName}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(200)]
+        [HttpGet]
+        public ActionResult<List<string>> GetFileContent(string fileName)
+        {
+            var response = SearchApi.GetFileContent(fileName);
+            if (response == null)
+                return new BadRequestResult();
+            return new OkObjectResult(response);
+        }
     }
 }

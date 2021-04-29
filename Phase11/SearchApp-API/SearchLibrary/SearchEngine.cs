@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using Nest;
 
 namespace SearchLibrary
@@ -47,6 +48,13 @@ namespace SearchLibrary
 
             var response = elastic.GetResponseOfQuery<Document>(queryContainer).Validate();
             return response.Hits.ToList().Select(x => x.Source.DocumentId).ToList();
+        }
+        public string GetDocuments(string fileName)
+        {
+            var queryContainer = Elastic.MakeTermQuery(query:fileName ,field:"documentId" );
+            var response = elastic.GetResponseOfQuery<Document>(queryContainer).Validate();
+            List<Document> documents = response.Hits.ToList().Select(x => x.Source).ToList();
+            return JsonSerializer.Serialize(documents);
         }
 
         private List<QueryContainer> MakeMatchQueryList(List<string> words)

@@ -1,10 +1,12 @@
-var url = "https://localhost:5001/"
+const url = "https://localhost:5001/"
+var normQuery;
+var plusQuery;
+var minusQuery;
+var queryWords = [];
 
 function initSearch() {
     // document.getElementById("advancedInputs").style.display = "none";
     document.getElementById("advancedInputs").className = "none";
-
-
     // const initrequest = new XMLHttpRequest();
     // initrequest.onreadystatechange = function () {
     //     if (this.readyState === 4 && this.status === 200) {
@@ -17,42 +19,22 @@ function initSearch() {
 }
 
 function preSearch() {
-    if (advanceActive)
-        return;
+
     let query = document.getElementById("searchInput").value.trim();
-    if (query === "")
+    if (query === "" || advanceActive)
         return;
-    // document.getElementById("resultBox").innerHTML = query + " query";
-    const xhttp = new XMLHttpRequest();
-
-    xhttp.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-            const resultsElement = document.createElement("div");
-            resultsElement.className = "results";
-            let parsed = JSON.parse(this.responseText);
-
-            for (let i = 0; i < 10 && i < parsed.length; i++) {
-                const divElement = document.createElement("div");
-                divElement.id = parsed[i];
-                divElement.addEventListener('click', fileHandler, false);
-
-                divElement.className = "result";
-                divElement.innerHTML = parsed[i];
-                resultsElement.appendChild(divElement);
-            }
-            document.getElementById("resultBox").innerHTML = "نتایج:";
-            document.getElementById("resultBox").appendChild(resultsElement);
-        }
-    };
-    xhttp.open('GET', url + 'query/' + query);
+    normQuery = query;
+    queryWords = normQuery.split(" ");
+    let xhttp = searchQueryHandler();
+    xhttp.open('GET', url + 'query/' + normQuery);
     xhttp.responseType = 'text';
     xhttp.send();
 }
 
-function search() {
-    let normQuery = document.getElementById("searchInput").value.trim();
-    let plusQuery = document.getElementById("plusInput").value.trim();
-    let minusQuery = document.getElementById("minusInput").value.trim();
+function advanceSearch() {
+    normQuery = document.getElementById("searchInput").value.trim();
+    plusQuery = document.getElementById("plusInput").value.trim();
+    // minusQuery = document.getElementById("minusInput").value.trim();
 
     if (normQuery + plusQuery + minusQuery === "")
         return;
@@ -65,28 +47,11 @@ function search() {
         parameters.push('pluses="' + plusQuery + '"');
     let queryString = 'query?' + parameters.join("&")
 
+    queryWords = normQuery.split(" ");
+    queryWords.push(plusQuery.split(" "));
+    queryWords.push(minusQuery.split(" "));
 
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-            const resultsElement = document.createElement("div");
-            resultsElement.className = "results";
-            let parsed = JSON.parse(this.responseText);
-
-            for (let i = 0; i < 10 && i < parsed.length; i++) {
-                const divElement = document.createElement("div");
-                divElement.id = parsed[i];
-                divElement.addEventListener('click', fileHandler, false);
-                divElement.className = "result";
-                divElement.innerHTML = parsed[i];
-                resultsElement.appendChild(divElement);
-            }
-            document.getElementById("resultBox").innerHTML = "نتایج:";
-            document.getElementById("resultBox").appendChild(resultsElement);
-        }
-    };
-
-
+    let xhttp = searchQueryHandler();
     xhttp.open('GET', url + queryString);
     xhttp.responseType = 'text';
     xhttp.send();
@@ -106,10 +71,9 @@ function advancedButtonHandler() {
 
         document.getElementById("normalBox").className = ".advanced-boxes";
         // document.getElementById("normalBox").style.gridTemplateRows= "90px 90px auto";
-
         advanceActive = true;
     } else {
-        search();
+        advanceSearch();
     }
 
 }
@@ -121,11 +85,11 @@ function fileHandler(element) {
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             let parsed = JSON.parse(this.responseText);
-            if(parsed==[]){
+            if (parsed == []) {
 
-            }else {
-                let resultElement =document.getElementById("resultBox");
-                resultElement.innerHTML="";
+            } else {
+                let resultElement = document.getElementById("resultBox");
+                resultElement.innerHTML = "";
 
                 let divElement = document.createElement("div");
                 divElement.className = "file-name";
@@ -133,13 +97,14 @@ function fileHandler(element) {
                 resultElement.appendChild(divElement);
                 divElement = document.createElement("div");
                 divElement.className = "scroll-box";
-                divElement.innerHTML = parsed[0].Content;
-
-                let span = document.createElement("span");
-                span.className = "highlighted-word";
-                span.innerHTML="heer";
-                divElement.appendChild(span)
-
+                var content =  parsed[0].Content;
+                for (let i = 0; i < queryWords.length; i++) {
+                    if(queryWords[i]=="")
+                        continue;
+                    var wordRegex=new RegExp(queryWords[i], "ig");
+                    content =content.replaceAll(wordRegex,'<span class="highlighted-word">'+queryWords[i]+'</span>');
+                }
+                divElement.innerHTML =content;
                 resultElement.appendChild(divElement);
 
             }
@@ -150,3 +115,26 @@ function fileHandler(element) {
     xhttp.responseType = 'text';
     xhttp.send();
 }
+
+function searchQueryHandler() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            const resultsElement = document.createElement("div");
+            resultsElement.className = "results";
+            let parsed = JSON.parse(this.responseText);
+            for (let i = 0; i < 10 && i < parsed.length; i++) {
+                const divElement = document.createElement("div");
+                divElement.id = parsed[i];
+                divElement.addEventListener('click', fileHandler, false);
+                divElement.className = "result";
+                divElement.innerHTML = parsed[i];
+                resultsElement.appendChild(divElement);
+            }
+            document.getElementById("resultBox").innerHTML = "نتایج:<br>"
+            document.getElementById("resultBox").appendChild(resultsElement);
+        }
+    };
+    return xhttp;
+}
+
