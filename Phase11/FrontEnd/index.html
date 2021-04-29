@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css" media="all">
     <script src="script.js"></script>
-    <title>Document Search</title>
+    <title>Search*</title>
 </head>
-<body onload="initSearch()" >
+<body onload="initSearch()">
 <!--<div class="logo">-->
 <!--    توراستار-->
 <!--</div>-->
@@ -17,31 +17,24 @@
 
 
 <div class="body-contents">
-    <div class="boxes">
+    <div id="normalBox" class="normal-boxes">
         <div class="search-box">
-            <span>عبارت را وارد کنید :</span>
-            <input placeholder="جست و جو" id="searchInput" class="search-input" onkeyup="preSearch()">
-            <button onclick="initSearch()">click</button>
-        </div>
-        <div id="result_box" class="result-box">
-            نتایج:
-            <div class="results">
-                <div class="result">
-                    1403
-                </div>
-                <div class="result">
-                    1406
-                </div>
-                <div class="result">
-                    1404
-                </div>
-                <div class="result">
-                    1409
-                </div>
-                <div class="result">
-                    1402
-                </div>
+            <span id="searchBoxLabel">عبارت را وارد کنید :</span>
+            <div id="inputs" class="inputs">
+                <input placeholder="جست و جو" id="searchInput" class="search-input" onkeyup="preSearch()">
+                <button id="searchOptionButton" class="search-option-button" onclick="advancedButtonHandler()">جست و جوی
+                    پیشرفته
+                </button>
             </div>
+            <div id="advancedInputs" class="advanced-inputs">
+                <input placeholder="شامل یکی از موارد باشد" id="plusInput" class="search-advanced-input"
+                       onkeyup="preSearch()">
+                <input placeholder="شامل هیچ یک از موارد نباشد" id="minusInput" class="search-advanced-input"
+                       onkeyup="preSearch()">
+            </div>
+        </div>
+        <div id="resultBox" class="result-box">
+
         </div>
     </div>
 
