@@ -49,7 +49,7 @@ function advanceSearch() {
 
     queryWords = normQuery.split(" ");
     queryWords.push(plusQuery.split(" "));
-    queryWords.push(minusQuery.split(" "));
+    // queryWords.push(minusQuery.split(" "));
 
     let xhttp = searchQueryHandler();
     xhttp.open('GET', url + queryString);
