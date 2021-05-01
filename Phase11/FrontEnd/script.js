@@ -5,17 +5,17 @@ var minusQuery;
 var queryWords = [];
 
 function initSearch() {
-    // document.getElementById("advancedInputs").style.display = "none";
     document.getElementById("advancedInputs").className = "none";
-    // const initrequest = new XMLHttpRequest();
-    // initrequest.onreadystatechange = function () {
-    //     if (this.readyState === 4 && this.status === 200) {
-    //         document.getElementById("resultBox").innerHTML = this.status+"{"+this.responseText+"}";
-    //     }
-    // };
-    // initrequest.open('GET', 'https://localhost:5001/init/y');
-    // initrequest.responseType = 'text';
-    // initrequest.send();
+
+    const initrequest = new XMLHttpRequest();
+    initrequest.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            document.getElementById("resultBox").innerHTML = this.status+"{"+this.responseText+"}";
+        }
+    };
+    initrequest.open('GET', 'https://localhost:5001/init/y');
+    initrequest.responseType = 'text';
+    initrequest.send();
 }
 
 function preSearch() {

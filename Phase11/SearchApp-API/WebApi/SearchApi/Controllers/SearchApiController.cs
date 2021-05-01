@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.Http.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SearchApi.Controllers
@@ -13,14 +14,15 @@ namespace SearchApi.Controllers
         {
             return new OkObjectResult("Hello \n" +
                                       "This is an Search API using Asp.net and Elastic Search\n" +
-                                      "use /query/[...] To make a search query\n" +
-                                      "use /init/[Y/n] To initial SearchEngine\n");
+                                      "use GET /query/[...] To make a search query\n" +
+                                      "use PUT /init/[Y/n] To initial SearchEngine\n");
         }
-
+        
+        
         [Route("init")]
         [Route("init/{isCreated}")]
         [ProducesResponseType(400)]
-        [HttpPut]
+        [HttpGet]
         public ActionResult<string> Init(string isCreated)
         {
             string response = null;
