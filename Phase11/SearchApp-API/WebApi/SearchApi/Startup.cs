@@ -22,22 +22,14 @@ namespace SearchApi
         }
 
         public IConfiguration Configuration { get; }
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "SearchApi", Version = "v1"}); });
-            // services.AddCors();
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                    builder =>
-                    {
-                        builder.WithOrigins("http://localhost:63343/");
-                    });
-            });
+            services.AddCors();
+            
         }
 
 
@@ -56,8 +48,7 @@ namespace SearchApi
             app.UseRouting();
 
             app.UseAuthorization();
-            // app.UseCors(builder => builder.AllowAnyOrigin());
-            app.UseCors(MyAllowSpecificOrigins);
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

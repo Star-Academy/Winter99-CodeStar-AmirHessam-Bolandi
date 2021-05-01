@@ -10,10 +10,12 @@ function initSearch() {
     const initrequest = new XMLHttpRequest();
     initrequest.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            document.getElementById("resultBox").innerHTML = this.status+"{"+this.responseText+"}";
+            document.getElementById("searchBoxLabel").innerHTML = "عبارت را وارد کنید :";
+        }else if(this.readyState === 4 && this.status !== 200){
+            document.getElementById("resultBox").innerHTML = "متاسفانه خطایی رخ داده و قادر به ارائه خدمات نیستیم:( "+this.responseText+"{"+this.status+"}";
         }
     };
-    initrequest.open('GET', 'https://localhost:5001/init/y');
+    initrequest.open('PUT', 'https://localhost:5001/init/y');
     initrequest.responseType = 'text';
     initrequest.send();
 }
@@ -34,7 +36,6 @@ function preSearch() {
 function advanceSearch() {
     normQuery = document.getElementById("searchInput").value.trim();
     plusQuery = document.getElementById("plusInput").value.trim();
-    // minusQuery = document.getElementById("minusInput").value.trim();
 
     if (normQuery + plusQuery + minusQuery === "")
         return;
@@ -120,9 +121,13 @@ function searchQueryHandler() {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
+            let parsed = JSON.parse(this.responseText);
+            if(parsed.length==0){
+                document.getElementById("resultBox").innerHTML = "نتیجه ای یافت نشد!<br>"
+                return;
+            }
             const resultsElement = document.createElement("div");
             resultsElement.className = "results";
-            let parsed = JSON.parse(this.responseText);
             for (let i = 0; i < 10 && i < parsed.length; i++) {
                 const divElement = document.createElement("div");
                 divElement.id = parsed[i];
@@ -131,6 +136,7 @@ function searchQueryHandler() {
                 divElement.innerHTML = parsed[i];
                 resultsElement.appendChild(divElement);
             }
+
             document.getElementById("resultBox").innerHTML = "نتایج:<br>"
             document.getElementById("resultBox").appendChild(resultsElement);
         }

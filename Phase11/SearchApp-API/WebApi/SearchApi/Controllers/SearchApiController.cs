@@ -22,7 +22,7 @@ namespace SearchApi.Controllers
         [Route("init")]
         [Route("init/{isCreated}")]
         [ProducesResponseType(400)]
-        [HttpGet]
+        [HttpPut]
         public ActionResult<string> Init(string isCreated)
         {
             string response = null;
