@@ -71,10 +71,8 @@
     height: 100vh;
     width: 100vw;
     direction: rtl;
-
-
-
 }
+
 .normal-boxes {
     display: inline-grid;
     grid-template-rows: 90px auto;
@@ -82,6 +80,7 @@
     gap: 10px;
     opacity: 0.9;
 }
+
 .advanced-boxes {
     display: inline-grid;
     grid-template-rows: 90px 100px auto;
@@ -92,7 +91,6 @@
 .search-box {
     display: inline-grid;
     grid-template-rows: auto auto;
-    /*border: 2px solid #bd8787;*/
     font-family: arsoo, serif;
     font-size: 18px;
 }
@@ -112,9 +110,9 @@
     margin-bottom: 10px;
     padding:5px ;
 }
-.search-option-button {
+.advance-search-button {
     font-family: yekan ,serif;
-    font-size: 10px;
+    font-size: 13px;
     border-radius: 10px;
     border-style: none;
     background-color:rgba(247,220,212,0.8);
@@ -122,6 +120,12 @@
     margin-top: 10px;
     margin-bottom: 10px;
     padding:5px ;
+    cursor: pointer;
+
+}
+.advance-search-button:hover , .inputs :hover , .search-advanced-input:hover {
+    background-color:rgba(225,121,128,0.65);
+    color : #0d1226;
 }
 .advanced-inputs {
     display: inline-grid;
