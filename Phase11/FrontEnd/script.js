@@ -4,7 +4,7 @@ var plusQuery;
 var minusQuery;
 var queryWords = [];
 
-function initSearch() {
+function onLoad() {
     document.getElementById("advancedInputs").className = "none";
 
     const initrequest = new XMLHttpRequest();
@@ -36,6 +36,7 @@ function preSearch() {
 function advanceSearch() {
     normQuery = document.getElementById("searchInput").value.trim();
     plusQuery = document.getElementById("plusInput").value.trim();
+    minusQuery = document.getElementById("minusInput").value.trim();
 
     if (normQuery + plusQuery + minusQuery === "")
         return;
