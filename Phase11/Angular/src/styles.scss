@@ -1,0 +1,39 @@
+@font-face {
+  font-family: my-nastaliq;
+  src: url("assets/fonts/IranNastaliq.ttf");
+}
+@font-face {
+  font-family:farhood;
+  src: url("assets/fonts/Farhood.ttf");
+}
+@font-face {
+  font-family:arsoo;
+  src: url("assets/fonts/FP_Arsoo.ttf");
+}
+@font-face {
+  font-family:yekan;
+  src: url("assets/fonts/Yekan.ttf");
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  border: 1px solid rgba(221,121,123,0.8);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(78,79,99,0.8);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(68,69,99,0.9);
+}
+::-webkit-scrollbar-corner{
+  background: none;
+}
+
