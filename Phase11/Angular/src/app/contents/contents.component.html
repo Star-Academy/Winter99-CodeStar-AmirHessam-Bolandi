@@ -1,0 +1,8 @@
+<app-search-box ></app-search-box>
+<div class="result-box">
+  <span>نتیجه ای یافت نشد.</span>
+  <span>نتایج:</span>
+  <div class="results">
+    <app-results *ngFor="let result of results" [resultValue]="result"></app-results>
+  </div>
+</div>

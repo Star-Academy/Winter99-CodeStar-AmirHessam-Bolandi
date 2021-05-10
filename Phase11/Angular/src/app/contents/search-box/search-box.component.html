@@ -1,0 +1,4 @@
+<div>
+  <app-normal-search (outPutNoramlValue)="getNormalValue($event)" (outPutButtonClick)="getButtonClick($event)"></app-normal-search>
+  <app-advance-search *ngIf="!advanceEnable"></app-advance-search>
+</div>

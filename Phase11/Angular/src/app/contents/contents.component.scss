@@ -1,0 +1,13 @@
+.result-box {
+  font-family: arsoo, serif;
+  font-size: 18px;
+  /*display: inline-grid;*/
+  grid-template-rows: 30px auto;
+
+}
+.results {
+  display: inline-grid;
+  grid-template-columns: 245px 245px;
+  gap: 10px;
+
+}
