@@ -8,6 +8,7 @@ import {Component, OnInit} from '@angular/core';
 export class ContentsComponent implements OnInit {
   public results: string[] = ['ali', 'res'];
   public resultsStatus: string;
+
   constructor() {
     this.resultsStatus = 'init';
   }
@@ -15,4 +16,7 @@ export class ContentsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public resultsHandler(results: string[]): void {
+    this.results = results;
+  }
 }
