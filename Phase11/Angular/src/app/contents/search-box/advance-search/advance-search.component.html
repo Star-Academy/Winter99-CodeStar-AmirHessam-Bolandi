@@ -1,1 +1,8 @@
-<p>advance-search works!</p>
+<div class="advanced-inputs">
+  <input [(ngModel)]="plusValue" placeholder="شامل یکی از موارد باشد" class="search-advanced-input"
+         (change)="passValue()"
+         (keyup)="passValue()">
+  <input [(ngModel)]="minusValue" placeholder="شامل هیچ یک از موارد نباشد" class="search-advanced-input"
+         (change)="passValue()"
+         (keyup)="passValue()">
+</div>

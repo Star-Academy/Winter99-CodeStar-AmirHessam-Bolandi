@@ -1,4 +1,5 @@
 <div>
-  <app-normal-search (outPutNoramlValue)="getNormalValue($event)" (outPutButtonClick)="getButtonClick($event)"></app-normal-search>
-  <app-advance-search *ngIf="!advanceEnable"></app-advance-search>
+  <app-normal-search (outPutNoramlValue)="getNormalValue($event)" (outPutButtonClick)="getButtonClick($event)" [buttonLabel]="buttonLabel" ></app-normal-search>
+  <app-advance-search (outPutPlusValue)="getPlusValue($event)" (outPutMinusValue)="getMinusValue($event)" *ngIf="advanceEnable"></app-advance-search>
+<!--  <app-advance-search (minusValue)="minusValue=$event" (plusValue)="plusValue=$event" *ngIf="advanceEnable"></app-advance-search>-->
 </div>

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-normal-search',
@@ -7,6 +7,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class NormalSearchComponent implements OnInit {
   public normalInp: string;
+  @Input()
   public buttonLabel: string;
   @Output()
   public outPutNoramlValue: EventEmitter<string> = new EventEmitter<string>();
@@ -16,6 +17,7 @@ export class NormalSearchComponent implements OnInit {
 
   constructor() {
     this.buttonLabel = 'جست و جوی پیشرفته';
+
   }
 
   ngOnInit(): void {
