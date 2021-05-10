@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-results',
@@ -8,9 +8,16 @@ import {Component, Input, OnInit} from '@angular/core';
 export class ResultsComponent implements OnInit {
   @Input()
   public resultValue: string;
-  constructor() { }
+  // @Output()
+  // public outPutResultClick: EventEmitter<string[]> = new EventEmitter<string[]>();
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
+  public fileHandler(event: MouseEvent): void {
+    // todo : open file in root and ...
+  }
 }

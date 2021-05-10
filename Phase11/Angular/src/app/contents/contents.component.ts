@@ -6,7 +6,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./contents.component.scss']
 })
 export class ContentsComponent implements OnInit {
-  public results: string[] = ['ali', 'res'];
+  public results: string[] = [];
   public resultsStatus: string;
 
   constructor() {
@@ -18,5 +18,10 @@ export class ContentsComponent implements OnInit {
 
   public resultsHandler(results: string[]): void {
     this.results = results;
+    if (this.results.length > 0) {
+      this.resultsStatus = 'found';
+    } else {
+      this.resultsStatus = 'not-found';
+    }
   }
 }
