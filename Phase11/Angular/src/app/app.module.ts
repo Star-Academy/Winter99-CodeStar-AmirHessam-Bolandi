@@ -6,10 +6,11 @@ import {BackGroundImgComponent} from './back-ground-img/back-ground-img.componen
 import {ContentsComponent} from './contents/contents.component';
 import {FormsModule} from '@angular/forms';
 import {SearchBoxComponent} from './contents/search-box/search-box.component';
-import {ClosedResultBoxComponent} from './contents/closed-result-box/closed-result-box.component';
-import {ContentsService} from './contents/services/contents.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { ResultsComponent } from './contents/results/results.component';
+import { NormalSearchComponent } from './contents/search-box/normal-search/normal-search.component';
+import { AdvanceSearchComponent } from './contents/search-box/advance-search/advance-search.component';
+import {HttpService} from './contents/services/http.service';
 
 @NgModule({
   declarations: [
@@ -17,15 +18,16 @@ import { ResultsComponent } from './contents/results/results.component';
     BackGroundImgComponent,
     ContentsComponent,
     SearchBoxComponent,
-    ClosedResultBoxComponent,
-    ResultsComponent
+    ResultsComponent,
+    NormalSearchComponent,
+    AdvanceSearchComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule
   ],
-  providers: [ContentsService, HttpClient],
+  providers: [HttpService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule {
