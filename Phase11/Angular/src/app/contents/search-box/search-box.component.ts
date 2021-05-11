@@ -12,6 +12,7 @@ export class SearchBoxComponent implements OnInit {
   public plusValue: string;
   public minusValue: string;
   public buttonLabel: string;
+
   @Output()
   public outPutResults: EventEmitter<string[]> = new EventEmitter<string[]>();
 
@@ -45,7 +46,6 @@ export class SearchBoxComponent implements OnInit {
       this.advanceEnable = true;
       this.buttonLabel = 'جست و جو';
     } else {
-      console.log(this.normalValue + ' - ' + this.minusValue + ' ' + this.plusValue);
       this.searchQuery(this.normalValue, this.plusValue, this.minusValue);
     }
   }

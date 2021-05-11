@@ -7,10 +7,17 @@ import {ContentsComponent} from './contents/contents.component';
 import {FormsModule} from '@angular/forms';
 import {SearchBoxComponent} from './contents/search-box/search-box.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import { ResultsComponent } from './contents/results/results.component';
-import { NormalSearchComponent } from './contents/search-box/normal-search/normal-search.component';
-import { AdvanceSearchComponent } from './contents/search-box/advance-search/advance-search.component';
+import {ResultsComponent} from './contents/results/results.component';
+import {NormalSearchComponent} from './contents/search-box/normal-search/normal-search.component';
+import {AdvanceSearchComponent} from './contents/search-box/advance-search/advance-search.component';
 import {HttpService} from './contents/services/http.service';
+import {FileContentsComponent} from './file-contents/file-contents.component';
+import {RouterModule} from '@angular/router';
+
+const routes = [
+  {path: 'home', component: AppComponent},
+  {path: 'file', component: FileContentsComponent}
+];
 
 @NgModule({
   declarations: [
@@ -20,12 +27,14 @@ import {HttpService} from './contents/services/http.service';
     SearchBoxComponent,
     ResultsComponent,
     NormalSearchComponent,
-    AdvanceSearchComponent
+    AdvanceSearchComponent,
+    FileContentsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [HttpService, HttpClient],
   bootstrap: [AppComponent]

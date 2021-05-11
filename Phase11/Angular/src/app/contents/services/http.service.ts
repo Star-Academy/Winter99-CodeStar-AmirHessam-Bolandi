@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Document} from '../../file-contents/models/Document';
 
 @Injectable()
 export class HttpService {
@@ -24,6 +25,10 @@ export class HttpService {
     }
     const queryString = 'query?' + parameters.join('&');
     return this.httpClient.get(this.url + queryString, {responseType: 'text'}).toPromise();
+  }
+
+  public async getFile(fileName: string): Promise<string> {
+    return this.httpClient.get(this.url + 'file/' + fileName, {responseType: 'text'}).toPromise();
   }
 
   public async initElastic(): Promise<string> {
