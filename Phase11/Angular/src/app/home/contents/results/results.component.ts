@@ -17,8 +17,4 @@ export class ResultsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public fileHandler(event: MouseEvent): void {
-
-    // todo : open file in root and ...
-  }
 }

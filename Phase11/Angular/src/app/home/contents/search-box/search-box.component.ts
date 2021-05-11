@@ -27,18 +27,18 @@ export class SearchBoxComponent implements OnInit {
   }
 
   public getNormalValue(normalValue: string): void {
-    this.normalValue = normalValue;
+    this.normalValue = normalValue.trim();
     if (!this.advanceEnable) {
       this.searchQuery(this.normalValue);
     }
   }
 
   public getMinusValue(minusValue: string): void {
-    this.minusValue = minusValue;
+    this.minusValue = minusValue.trim();
   }
 
   public getPlusValue(plusValue: string): void {
-    this.plusValue = plusValue;
+    this.plusValue = plusValue.trim();
   }
 
   public getButtonClick(click: any): void {
