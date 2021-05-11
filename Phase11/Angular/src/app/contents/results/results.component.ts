@@ -18,6 +18,7 @@ export class ResultsComponent implements OnInit {
   }
 
   public fileHandler(event: MouseEvent): void {
+
     // todo : open file in root and ...
   }
 }

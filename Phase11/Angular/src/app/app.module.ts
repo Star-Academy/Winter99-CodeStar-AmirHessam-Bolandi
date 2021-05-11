@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppComponent} from './app.component';
 import {BackGroundImgComponent} from './back-ground-img/back-ground-img.component';
 import {ContentsComponent} from './contents/contents.component';
@@ -13,11 +12,13 @@ import {AdvanceSearchComponent} from './contents/search-box/advance-search/advan
 import {HttpService} from './contents/services/http.service';
 import {FileContentsComponent} from './file-contents/file-contents.component';
 import {RouterModule} from '@angular/router';
+import { HomeComponent } from './home/home.component';
 
 const routes = [
   {path: 'home', component: AppComponent},
-  {path: 'file', component: FileContentsComponent}
+  {path: 'file/:fileName', component: FileContentsComponent}
 ];
+
 
 @NgModule({
   declarations: [
@@ -28,13 +29,17 @@ const routes = [
     ResultsComponent,
     NormalSearchComponent,
     AdvanceSearchComponent,
-    FileContentsComponent
+    FileContentsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes)
+  ],
+  exports: [
+    RouterModule
   ],
   providers: [HttpService, HttpClient],
   bootstrap: [AppComponent]

@@ -1,1 +1,3 @@
-<div class="result" (click)="fileHandler($event)">{{resultValue}}</div>
+<a routerLink='file/{{resultValue}}'  (click)="fileHandler($event)">
+  <div class="result">{{resultValue}}</div>
+</a>
