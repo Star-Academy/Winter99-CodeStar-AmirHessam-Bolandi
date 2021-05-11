@@ -1,4 +1,5 @@
-<p>
-  fsfdvfv
-  fsdf
-</p>
+<app-back-ground-img></app-back-ground-img>
+<div class="content">
+  <div class="file-name">{{document.DocumentId}}</div>
+  <div *ngIf="document.Content!==''" class="scroll-box">{{document.Content}}</div>
+</div>

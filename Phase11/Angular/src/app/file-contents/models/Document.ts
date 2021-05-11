@@ -1,4 +1,9 @@
 export class Document {
-  DocumentId: string;
-  Content: string;
+  public DocumentId: string;
+  public Content: string;
+
+  constructor(documentId: string, content: string) {
+    this.DocumentId = documentId;
+    this.Content = content;
+  }
 }

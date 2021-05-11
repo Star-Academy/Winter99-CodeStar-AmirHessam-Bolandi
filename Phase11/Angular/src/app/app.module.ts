@@ -2,20 +2,22 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {BackGroundImgComponent} from './back-ground-img/back-ground-img.component';
-import {ContentsComponent} from './contents/contents.component';
+import {ContentsComponent} from './home/contents/contents.component';
 import {FormsModule} from '@angular/forms';
-import {SearchBoxComponent} from './contents/search-box/search-box.component';
+import {SearchBoxComponent} from './home/contents/search-box/search-box.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {ResultsComponent} from './contents/results/results.component';
-import {NormalSearchComponent} from './contents/search-box/normal-search/normal-search.component';
-import {AdvanceSearchComponent} from './contents/search-box/advance-search/advance-search.component';
-import {HttpService} from './contents/services/http.service';
+import {ResultsComponent} from './home/contents/results/results.component';
+import {NormalSearchComponent} from './home/contents/search-box/normal-search/normal-search.component';
+import {AdvanceSearchComponent} from './home/contents/search-box/advance-search/advance-search.component';
+import {HttpService} from './services/http.service';
 import {FileContentsComponent} from './file-contents/file-contents.component';
 import {RouterModule} from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { MenuBarComponent } from './menu-bar/menu-bar.component';
 
 const routes = [
-  {path: 'home', component: AppComponent},
+  {path: 'home', component: HomeComponent},
+  {path: '', redirect: 'home' , component: HomeComponent},
   {path: 'file/:fileName', component: FileContentsComponent}
 ];
 
@@ -30,7 +32,8 @@ const routes = [
     NormalSearchComponent,
     AdvanceSearchComponent,
     FileContentsComponent,
-    HomeComponent
+    HomeComponent,
+    MenuBarComponent
   ],
   imports: [
     BrowserModule,
