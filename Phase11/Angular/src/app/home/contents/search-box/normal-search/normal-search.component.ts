@@ -10,7 +10,7 @@ export class NormalSearchComponent implements OnInit {
   @Input()
   public buttonLabel: string;
   @Output()
-  public outPutNoramlValue: EventEmitter<string> = new EventEmitter<string>();
+  public outPutNormalValue: EventEmitter<string> = new EventEmitter<string>();
   @Output()
   public outPutButtonClick: EventEmitter<string> = new EventEmitter<string>();
 
@@ -24,7 +24,7 @@ export class NormalSearchComponent implements OnInit {
   }
 
   public passValue(): void {
-    this.outPutNoramlValue.emit(this.normalInp);
+    this.outPutNormalValue.emit(this.normalInp);
   }
 
   public buttonHandler(): void {

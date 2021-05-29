@@ -6,18 +6,18 @@ namespace SearchLibrary
 {
     public class Query
     {
-        public const string NORMAL_PATTERN = @"\s(\w+)";
-        public const string PLUS_PATTERN = @"\+(\w+)";
-        public const string MINUS_PATTERN = @"-(\w+)";
+        public const string NormalPattern = @"\s(\w+)";
+        public const string PlusPattern = @"\+(\w+)";
+        public const string MinusPattern = @"-(\w+)";
         
 
         public List<string> Normals { get; }
         public List<string> Pluses { get; }
         public List<string> Minuses { get; }
         public Query(string query){ 
-            Normals = FindPattern(" "+query , NORMAL_PATTERN);
-            Minuses = FindPattern(query , MINUS_PATTERN);
-            Pluses = FindPattern(query , PLUS_PATTERN);   
+            Normals = FindPattern(" "+query , NormalPattern);
+            Minuses = FindPattern(query , MinusPattern);
+            Pluses = FindPattern(query , PlusPattern);   
         }
         public Query(string normals ,string pluses,string minuses)
         {

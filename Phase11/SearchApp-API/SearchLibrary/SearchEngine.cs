@@ -20,10 +20,8 @@ namespace SearchLibrary
 
         public BulkResponse PostDocuments(string path)
         {
-            
             new FileReader(path).ReadContent().ForEach(x => Console.WriteLine("logggg"+x));
             return elastic.BulkIndex(new FileReader(path).ReadContent(), "DocumentId").Validate();
-            
         }
 
         public static ITypeMapping CreateMapping(TypeMappingDescriptor<Document> mappingDescriptor)

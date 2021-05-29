@@ -11,15 +11,15 @@ namespace SearchApi
     public class SearchApi
     {
         private static SearchEngine searchEngine;
-        private const string ELASTIC_URI = "http://localhost:9200";
-        private const string INDEX_NAME = "documents";
+        private const string ElasticUri = "http://localhost:9200";
+        private const string IndexName = "documents";
 
 
         public static string Initialize(bool isCreated)
         {
             try
             {
-                searchEngine = new SearchEngine(INDEX_NAME, new Uri(ELASTIC_URI), isCreated);
+                searchEngine = new SearchEngine(IndexName, new Uri(ElasticUri), isCreated);
                 return "initialized";
             }
             catch (Exception e)

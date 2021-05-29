@@ -1,8 +1,8 @@
 <div class="advanced-inputs">
-  <input [(ngModel)]="plusValue" placeholder="شامل یکی از موارد باشد" class="search-advanced-input"
+  <input [(ngModel)]="plusValue" placeholder="{{plusPlaceHolder}}" class="search-advanced-input"
          (change)="passValue()"
          (keyup)="passValue()">
-  <input [(ngModel)]="minusValue" placeholder="شامل هیچ یک از موارد نباشد" class="search-advanced-input"
+  <input [(ngModel)]="minusValue" placeholder="{{minusPlaceHolder}}" class="search-advanced-input"
          (change)="passValue()"
          (keyup)="passValue()">
 </div>

@@ -6,21 +6,21 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
   styleUrls: ['./advance-search.component.scss']
 })
 export class AdvanceSearchComponent implements OnInit {
+  public plusPlaceHolder = 'شامل یکی از موارد باشد';
+  public minusPlaceHolder = 'شامل هیچ یک از موارد نباشد';
   public plusValue: string;
   public minusValue: string;
   @Output()
   public outPutPlusValue: EventEmitter<string> = new EventEmitter<string>();
   @Output()
   public outPutMinusValue: EventEmitter<string> = new EventEmitter<string>();
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
 
   public passValue(): void {
     this.outPutPlusValue.emit(this.plusValue);
     this.outPutMinusValue.emit(this.minusValue);
+  }
+
+  ngOnInit(): void {
   }
 
 }

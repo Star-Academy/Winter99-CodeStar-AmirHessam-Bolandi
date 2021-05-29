@@ -8,16 +8,16 @@ namespace SearchLibrary
         public DbSet<Document> Documents { get; set; }
         public DbSet<IndexMap> IndexMaps { get; set; }
         public DbSet<Entry> Entries { get; set; }
-        private string server;
+        private readonly string _server;
 
         public SearchContext(string server)
         {
-            this.server = server;
+            this._server = server;
         }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(String.Format(@"Server={0};Database=SearchDB;Trusted_Connection=True;", server));
+            optionsBuilder.UseSqlServer($"Server={_server};Database=SearchDB;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

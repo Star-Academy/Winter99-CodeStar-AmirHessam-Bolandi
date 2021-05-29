@@ -64,15 +64,11 @@ var advanceActive = false;
 function advancedButtonHandler() {
     if (!advanceActive) {
         document.getElementById("resultBox").innerHTML = "";
-
-        // document.getElementById("advancedInputs").style.display= "inline";
         document.getElementById("advancedInputs").className = "advanced-inputs";
         document.getElementById("searchOptionButton").style.fontSize = "15px";
         document.getElementById("searchOptionButton").innerHTML = "جست و جو"
         document.getElementById("searchBoxLabel").innerHTML = "عبارات مورد نظر خود را با فاصله وارد کنید:"
-
         document.getElementById("normalBox").className = ".advanced-boxes";
-        // document.getElementById("normalBox").style.gridTemplateRows= "90px 90px auto";
         advanceActive = true;
     } else {
         advanceSearch();
