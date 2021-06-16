@@ -1,0 +1,10 @@
+<div class="content">
+  <app-search-box (outPutResults)="resultsHandler($event)"></app-search-box>
+  <div class="result-box">
+    <span *ngIf="resultsStatus==='not-found'">نتیجه ای یافت نشد.</span>
+    <span *ngIf="resultsStatus==='found'">نتایج:</span>
+    <div class="results">
+      <app-results *ngFor="let result of results" [resultValue]="result"></app-results>
+    </div>
+  </div>
+</div>

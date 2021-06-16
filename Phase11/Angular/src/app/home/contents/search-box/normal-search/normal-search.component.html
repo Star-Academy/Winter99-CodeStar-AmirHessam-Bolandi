@@ -1,0 +1,6 @@
+<span>عبارت را وارد کنید :</span>
+<div class="inputs">
+  <input [(ngModel)]="normalInp" placeholder="جست و جو" class="search-input" (change)="passValue()"
+         (keyup)="passValue()">
+  <button class="advance-search-button" (click)="buttonHandler()">{{buttonLabel}}</button>
+</div>

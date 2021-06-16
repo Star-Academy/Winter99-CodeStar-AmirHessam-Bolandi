@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# 
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchLibrary", "SearchLibrary\SearchLibrary.csproj", "{BE875E0B-099E-4E90-B10B-F7804A403FAE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{D50FE055-C711-416E-9042-E41A9D0FB1F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchApi", "WebApi\SearchApi\SearchApi.csproj", "{566490ED-2115-4011-9E4B-A27A231AC113}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE875E0B-099E-4E90-B10B-F7804A403FAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE875E0B-099E-4E90-B10B-F7804A403FAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE875E0B-099E-4E90-B10B-F7804A403FAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE875E0B-099E-4E90-B10B-F7804A403FAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{566490ED-2115-4011-9E4B-A27A231AC113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{566490ED-2115-4011-9E4B-A27A231AC113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{566490ED-2115-4011-9E4B-A27A231AC113}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{566490ED-2115-4011-9E4B-A27A231AC113}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{566490ED-2115-4011-9E4B-A27A231AC113} = {D50FE055-C711-416E-9042-E41A9D0FB1F7}
+	EndGlobalSection
+EndGlobal

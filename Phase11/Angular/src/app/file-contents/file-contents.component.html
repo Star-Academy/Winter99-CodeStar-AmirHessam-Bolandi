@@ -1,0 +1,6 @@
+<app-back-ground-img></app-back-ground-img>
+<app-menu-bar></app-menu-bar>
+<div class="content">
+  <div class="file-name">{{document.DocumentId}}</div>
+  <div *ngIf="document.Content!==''" class="scroll-box">{{document.Content}}</div>
+</div>

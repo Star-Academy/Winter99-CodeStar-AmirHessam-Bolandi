@@ -1,0 +1,21 @@
+.advanced-inputs {
+  display: inline-grid;
+  grid-template-columns: 248px 247px;
+  gap: 5px;
+}
+
+.search-advanced-input {
+  font-family: yekan ,serif;
+  font-size: 12px;
+  border-radius: 10px;
+  border-style: none;
+  background-color:rgba(247,220,212,0.8);
+  color : #131b35;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding:5px ;
+}
+.search-advanced-input:hover{
+  background-color:rgba(225,121,128,0.65);
+  color : #0d1226;
+}

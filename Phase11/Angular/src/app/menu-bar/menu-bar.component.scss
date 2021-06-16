@@ -1,0 +1,41 @@
+
+.menu-bar {
+  background-color: rgba(40, 62, 73, 0.5);
+  height: 40px;
+  top: 0;
+  padding: 0;
+  margin: 0 0;
+  border-bottom: white;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+}
+
+.logo {
+  float: right;
+  font-size: 25px;
+  font-stretch: ultra-condensed;
+  color: #f68477;
+  font-family: my-nastaliq, serif;
+  padding: 0;
+  margin-left: 5px ;
+  height: 40px;
+  width: auto;
+
+}
+
+.main-menu-item {
+  float: right;
+}
+
+.main-menu-item > a:hover {
+  background-color: #fdfdfe;
+  color: #283e49;
+}
+
+.main-menu-item > a {
+  color: #b3c4d2;
+  text-decoration: none;
+  font-family: farhood, serif;
+  font-size: 30px;
+  height: 40px;
+}
